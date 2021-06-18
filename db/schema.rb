@@ -16,10 +16,10 @@ ActiveRecord::Schema.define(version: 2021_06_18_080504) do
     t.string "number"
     t.string "departure_airport"
     t.string "arrival_airport"
-    t.datetime "departure_datetime"
-    t.datetime "arrival_datetime"
-    t.integer "max_eco_seats"
-    t.integer "max_business_seats"
+    t.integer "business_class_seats"
+    t.integer "economy_class_seats"
+    t.integer "duration"
+    t.datetime "departure_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
