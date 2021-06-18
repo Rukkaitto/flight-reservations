@@ -1,0 +1,5 @@
+Dear <%= @user.first_name %> <%= @user.name %>,
+Thank you for booking the flight from <%= @flight.departure_airport %> to <%= @flight.arrival_airport %>.
+Here is your reservation:
+  - Class: <%= @reservation.flight_class %>
+  - Number of passengers: <%= @reservation.passengers_count %>

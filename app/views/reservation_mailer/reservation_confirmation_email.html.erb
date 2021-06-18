@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<p>
+  Dear <%= @user.first_name %> <%= @user.name %>, <br>
+  Thank you for booking the flight from <%= @flight.departure_airport %> to <%= @flight.arrival_airport %>. <br>
+  Here is your reservation:
+  <ul>
+    <li>
+      Class: <%= @reservation.flight_class %>
+    </li>
+    <li>
+      Number of passengers: <%= @reservation.passengers_count %>
+    </li>
+  </ul>
+</p>
+</body>
+</html>

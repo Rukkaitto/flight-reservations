@@ -18,7 +18,7 @@
         <td><%= flight.number %></td>
         <td><%= flight.departure_airport %></td>
         <td><%= flight.arrival_airport %></td>
-        <td><%= flight.departure_date%></td>
+        <td><%= flight.departure_date.to_s(:db)%></td>
         <td><%= (flight.duration / 60) %>:<%= (flight.duration % 60).to_s.rjust(2, '0') %></td>
         <td><%= link_to 'Reservation', new_reservation_path(flight_id: flight.id) %></td>
       </tr>

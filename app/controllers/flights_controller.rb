@@ -3,7 +3,7 @@ class FlightsController < ApplicationController
 
   # GET /flights or /flights.json
   def index
-    @flights = Flight.page(params[:page] ? params[:page] : 1);
+    @flights = Flight.page(params[:page]);
   end
 
   # GET /flights/1 or /flights/1.json
