@@ -11,8 +11,20 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <nav>
+      <span><%= link_to "Flights", flights_path %></span>
+      <% if user_signed_in? %>
+        <span><%= link_to "My reservations", reservations_path %></span>
+        <span><%= link_to "Log out", destroy_user_session_path, method: :delete %></span>
+      <% else %>
+        <span><%= link_to "Log in", new_user_session_path %></span>
+        <span><%= link_to "Sign up", new_user_registration_path %></span>
+      <% end %>
+    </nav>
+    <div class="content">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </div>
   </body>
 </html>

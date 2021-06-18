@@ -1,9 +1,14 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: %i[ show destroy ]
+  before_action :authenticate_user!
 
   # GET /reservations or /reservations.json
   def index
-    @reservations = Reservation.all
+    if user_signed_in?
+      @reservations = current_user.reservations
+    else
+      redirect_back fallback_location: flights_url
+    end
   end
 
   # GET /reservations/1 or /reservations/1.json
@@ -12,25 +17,29 @@ class ReservationsController < ApplicationController
 
   # GET /reservations/new
   def new
-    @reservation = Reservation.new()
-  end
-
-  # GET /reservations/1/edit
-  def edit
+    if user_signed_in?
+      @reservation = Reservation.new
+    else
+      redirect_back fallback_location: flights_url
+    end
   end
 
   # POST /reservations or /reservations.json
   def create
-    @reservation = Reservation.new(reservation_params)
+    if user_signed_in?
+      @reservation = Reservation.new(reservation_params)
 
-    respond_to do |format|
-      if @reservation.save
-        format.html { redirect_to @reservation, notice: "Reservation was successfully created." }
-        format.json { render :show, status: :created, location: @reservation }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @reservation.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @reservation.save
+          format.html { redirect_to reservations_url, notice: "Reservation was successfully created." }
+          format.json { render :show, status: :created, location: @reservation }
+        else
+          format.html { render new_reservation_path(flight_id: params[:flight_id]), status: :unprocessable_entity }
+          format.json { render json: @reservation.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_back fallback_location: flights_url
     end
   end
 
@@ -38,7 +47,7 @@ class ReservationsController < ApplicationController
   def destroy
     @reservation.destroy
     respond_to do |format|
-      format.html { redirect_to reservations_url, notice: "Reservation was successfully destroyed." }
+      format.html { redirect_to reservations_url, notice: "Reservation was successfully cancelled." }
       format.json { head :no_content }
     end
   end

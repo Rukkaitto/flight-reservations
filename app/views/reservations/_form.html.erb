@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :flight_class %>
-    <%= form.text_field :flight_class %>
+    <%= form.select :flight_class, ["Eco", "Business"], {include_blank: "Select your class"}, {} %>
   </div>
 
   <div class="field">
@@ -22,7 +22,7 @@
   </div>
 
   <div class="field">
-    <%= form.hidden_field :user_id, value: params[:user_id] %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
   </div>
 
   <div class="field">
