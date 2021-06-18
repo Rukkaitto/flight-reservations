@@ -15,8 +15,7 @@
       <tr>
         <td><%= reservation.flight_class %></td>
         <td><%= reservation.passengers_count %></td>
-        <td><%= link_to reservation.flight.number, reservation.flight %></td>
-        <td><%= link_to 'Show', reservation %></td>
+        <td><%= link_to "#{reservation.flight.departure_airport}->#{reservation.flight.arrival_airport}", reservation.flight %></td>
         <td><%= link_to 'Cancel', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

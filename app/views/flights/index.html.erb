@@ -19,7 +19,7 @@
         <td><%= flight.departure_airport %></td>
         <td><%= flight.arrival_airport %></td>
         <td><%= flight.departure_date%></td>
-        <td><%= flight.duration %></td>
+        <td><%= (flight.duration / 60) %>:<%= (flight.duration % 60).to_s.rjust(2, '0') %></td>
         <td><%= link_to 'Reservation', new_reservation_path(flight_id: flight.id) %></td>
       </tr>
     <% end %>
@@ -27,3 +27,13 @@
 </table>
 
 <br>
+
+<% unless @flights.first_page? %>
+<%=  link_to '<', flights_path(page: @flights.prev_page)  %>
+<% end %>
+
+Page <%= @flights.current_page %>/<%= @flights.total_pages %>
+
+<% unless @flights.last_page? %>
+  <%= link_to '>', flights_path(page: @flights.next_page) %>
+<% end %>
