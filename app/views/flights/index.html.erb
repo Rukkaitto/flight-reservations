@@ -1,21 +1,25 @@
 <div class="flex flex-col w-screen h-screen">
-  <div class="pl-10 py-16 text-white rounded-bl-5rem bg-gradient-to-br from-purple-300 to-pink-500 text-4xl font-bold mb-5">
+  <div class="pl-10 py-16 text-white rounded-bl-5rem bg-gradient-to-br from-purple-300 to-pink-500 text-4xl font-bold">
     Flights
   </div>
 
-  <div class="overflow-x-hidden overflow-y-scroll flex flex-col items-center mx-5">
+  <div class="overflow-x-hidden overflow-y-scroll flex flex-col items-center mx-5 pt-5">
     <%= render @flights %>
   </div>
 
-  <div class="self-center text-lg bg-transparent p-3">
+  <div class="self-center text-xl font-semibold bg-transparent p-3 flex flex-row justify-between items-center w-48">
     <% unless @flights.first_page? %>
-      <%=  link_to '<', flights_path(page: @flights.prev_page)  %>
+        <%= link_to '<', flights_path(page: @flights.prev_page), class: "hover:bg-transparent hover:text-gray-500" %>
     <% end %>
-
-    Page <%= @flights.current_page %>/<%= @flights.total_pages %>
-
+    <% (1..(@flights.total_pages)).each do |page| %>
+      <% if page == @flights.current_page %>
+        <%= link_to page, flights_path(page: page), class: "hover:bg-purple-300 hover:text-white rounded-full bg-purple-300 w-7 h-7 text-center text-white visited:text-white" %>
+      <% else %>
+        <%= link_to page, flights_path(page: page), class: "hover:bg-transparent hover:text-gray-500" %>
+      <% end %>
+    <% end %>
     <% unless @flights.last_page? %>
-      <%= link_to '>', flights_path(page: @flights.next_page) %>
+        <%= link_to '>', flights_path(page: @flights.next_page), class: "hover:bg-transparent hover:text-gray-500" %>
     <% end %>
   </div>
 </div>

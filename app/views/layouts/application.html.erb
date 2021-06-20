@@ -13,13 +13,13 @@
 
   <body>
     <div class="absolute right-0 top-0 flex flex-row p-3 w-full justify-end">
-      <%= link_to "Flights", flights_path, class: "font-semibold mx-3 text-lg text-white visited:text-white" %>
+      <%= link_to "Flights", flights_path, class: "hover:bg-transparent hover:text-white font-semibold mx-3 text-lg text-white visited:text-white" %>
       <% if user_signed_in? %>
-        <%= link_to "My reservations", reservations_path, class: "font-semibold mx-3 text-lg text-white visited:text-white" %>
-        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "font-semibold mx-3 text-lg text-white visited:text-white" %>
+        <%= link_to "Reservations", reservations_path, class: "hover:bg-transparent hover:text-white font-semibold mx-3 text-lg text-white visited:text-white" %>
+        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "hover:bg-transparent hover:text-white font-semibold mx-3 text-lg text-white visited:text-white" %>
       <% else %>
-        <%= link_to "Log in", new_user_session_path, class: "font-semibold mx-3 text-lg text-white visited:text-white" %>
-        <%= link_to "Sign up", new_user_registration_path, class: "font-semibold mx-3 text-lg text-white visited:text-white" %>
+        <%= link_to "Log in", new_user_session_path, class: "hover:bg-transparent hover:text-white font-semibold mx-3 text-lg text-white visited:text-white" %>
+        <%= link_to "Sign up", new_user_registration_path, class: "hover:bg-transparent hover:text-white font-semibold mx-3 text-lg text-white visited:text-white" %>
       <% end %>
     </div>
     <div class="content">
