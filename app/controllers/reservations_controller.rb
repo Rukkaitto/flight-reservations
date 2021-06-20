@@ -32,7 +32,7 @@ class ReservationsController < ApplicationController
       respond_to do |format|
         if @reservation.save
           ReservationMailer.with(user: current_user, reservation: @reservation, flight: @reservation.flight).reservation_confirmation_email.deliver_later
-          format.html { redirect_to reservations_url, notice: "Reservation was successfully created." }
+          format.html { redirect_to reservations_url, notice: "Thank you for booking this flight. A confirmation email has been sent to #{current_user.email}." }
           format.json { render :show, status: :created, location: @reservation }
         else
           format.html { render new_reservation_path(flight_id: params[:flight_id]), status: :unprocessable_entity }

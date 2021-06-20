@@ -7,20 +7,21 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <nav>
-      <span><%= link_to "Flights", flights_path %></span>
+    <div class="absolute right-0 top-0 flex flex-row p-3 w-full justify-end">
+      <%= link_to "Flights", flights_path, class: "font-semibold mx-3 text-lg text-white visited:text-white" %>
       <% if user_signed_in? %>
-        <span><%= link_to "My reservations", reservations_path %></span>
-        <span><%= link_to "Log out", destroy_user_session_path, method: :delete %></span>
+        <%= link_to "My reservations", reservations_path, class: "font-semibold mx-3 text-lg text-white visited:text-white" %>
+        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "font-semibold mx-3 text-lg text-white visited:text-white" %>
       <% else %>
-        <span><%= link_to "Log in", new_user_session_path %></span>
-        <span><%= link_to "Sign up", new_user_registration_path %></span>
+        <%= link_to "Log in", new_user_session_path, class: "font-semibold mx-3 text-lg text-white visited:text-white" %>
+        <%= link_to "Sign up", new_user_registration_path, class: "font-semibold mx-3 text-lg text-white visited:text-white" %>
       <% end %>
-    </nav>
+    </div>
     <div class="content">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
