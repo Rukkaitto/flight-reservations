@@ -1,0 +1,33 @@
+<div class="md:w-1/2 w-full py-5 px-8 mx-6 my-2 rounded-2xl border border-gray-300 flex flex-row items-center justify-between">
+  <div>
+    <div class="flex flex-row">
+      <div class="font-semibold mr-3">
+        Flight:
+      </div>
+      <div>
+        <%= "#{reservation.flight.departure_airport}->#{reservation.flight.arrival_airport}" %>
+      </div>
+    </div>
+
+    <div class="flex flex-row">
+      <div class="font-semibold mr-3">
+        Class:
+      </div>
+      <div>
+        <%= reservation.flight_class %>
+      </div>
+    </div>
+
+    <div class="flex flex-row">
+      <div class="font-semibold mr-3">
+        Passengers:
+      </div>
+      <div>
+        <%= reservation.passengers_count %>
+      </div>
+    </div>
+  </div>
+  <%= link_to 'Cancel', reservation, method: :delete, data: { confirm: 'Are you sure?' }, :class => "bg-red-600 p-3 rounded-full text-white w-24 text-center font-semibold" %>
+
+
+</div>
