@@ -17,6 +17,7 @@ class ReservationsController < ApplicationController
 
   # GET /reservations/new
   def new
+    @query = params[:query]
     if user_signed_in?
       @reservation = Reservation.new
     else
@@ -28,16 +29,11 @@ class ReservationsController < ApplicationController
   def create
     if user_signed_in?
       @reservation = Reservation.new(reservation_params)
-
-      respond_to do |format|
-        if @reservation.save
-          ReservationMailer.with(user: current_user, reservation: @reservation, flight: @reservation.flight).reservation_confirmation_email.deliver_later
-          format.html { redirect_to reservations_url, notice: "Thank you for booking this flight. A confirmation email has been sent to #{current_user.email}." }
-          format.json { render :show, status: :created, location: @reservation }
-        else
-          format.html { render new_reservation_path(flight_id: params[:flight_id]), status: :unprocessable_entity }
-          format.json { render json: @reservation.errors, status: :unprocessable_entity }
-        end
+      if @reservation.save
+        ReservationMailer.with(user: current_user, reservation: @reservation, flight: @reservation.flight).reservation_confirmation_email.deliver_later
+        redirect_to reservations_url, notice: "Thank you for booking this flight. A confirmation email has been sent to #{current_user.email}."
+      else
+        render :new
       end
     else
       redirect_back fallback_location: flights_url
