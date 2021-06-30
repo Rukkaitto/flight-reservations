@@ -1,32 +1,35 @@
 <div class="md:w-1/2 w-full py-5 px-8 mx-6 my-2 rounded-2xl border border-gray-300">
   <div class="flex flex-col">
-    <div class="font-semibold text-lg mb-2">
-      #<%= flight.number %>
+    <div class="flex flex-col">
+      <div class="font-semibold text-lg mb-2">
+        #<%= flight.number %>
+      </div>
+      <div class="flex flex-row justify-between">
+        <div class="flex flex-col">
+          <div class="font-semibold">
+            <%= flight.departure_date.strftime("%H:%M") %>
+          </div>
+          <div class="text-gray-500 font-semibold">
+            <%= flight.departure_airport %>
+          </div>
+        </div>
+        <div class="mx-5 border-t border-gray-400 flex flex-grow flex-col items-center self-center relative">
+          <div class="absolute -left-1 -top-1 w-2 h-2 bg-green-400 rounded-full"></div>
+          <div class="absolute -right-1 -top-1 w-2 h-2 bg-red-400 rounded-full"></div>
+          <div class="mt-1 font-semibold text-gray-500">
+            <%= "#{flight.duration / 60}hr#{flight.duration % 60}m" %>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <div class="font-semibold">
+            <%= (flight.departure_date + flight.duration.minutes).strftime("%H:%M") %>
+          </div>
+          <div class="text-gray-500 font-semibold">
+            <%= flight.arrival_airport %>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="flex flex-row justify-between">
-      <div class="flex flex-col">
-        <div class="font-semibold">
-          <%= flight.departure_date.strftime("%H:%M") %>
-        </div>
-        <div class="text-gray-500 font-semibold">
-          <%= flight.departure_airport %>
-        </div>
-      </div>
-      <div class="mx-5 border-t border-gray-400 flex flex-grow flex-col items-center self-center relative">
-        <div class="absolute -left-1 -top-1 w-2 h-2 bg-green-400 rounded-full"></div>
-        <div class="absolute -right-1 -top-1 w-2 h-2 bg-red-400 rounded-full"></div>
-        <div class="mt-1 font-semibold text-gray-500">
-          <%= "#{flight.duration / 60}hr#{flight.duration % 60}m" %>
-        </div>
-      </div>
-      <div class="flex flex-col">
-        <div class="font-semibold">
-          <%= (flight.departure_date + flight.duration.minutes).strftime("%H:%M") %>
-        </div>
-        <div class="text-gray-500 font-semibold">
-          <%= flight.arrival_airport %>
-        </div>
-      </div>
-    </div>
+    <%= link_to 'Book this flight', new_reservation_path(flight_id: flight.id, user_id: current_user.id), :class => "self-end bg-purple-400 p-3 rounded-full text-white w-32 text-center font-semibold mt-3" %>
   </div>
 </div>

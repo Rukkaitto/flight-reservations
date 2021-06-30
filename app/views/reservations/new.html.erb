@@ -1,5 +1,10 @@
-<h1>New Reservation</h1>
+<div class="flex flex-col w-screen h-screen">
+  <div class="pl-10 py-16 text-white rounded-bl-5rem bg-gradient-to-br from-purple-300 to-pink-500 text-4xl font-bold">
+    Book a flight
+  </div>
 
-<%= render 'form', reservation: @reservation %>
+  <%= render 'form', reservation: @reservation %>
 
-<%= link_to 'Back', reservations_path %>
+  <%= link_to 'Back', reservations_path, :class => "self-center mt-3" %>
+
+</div>

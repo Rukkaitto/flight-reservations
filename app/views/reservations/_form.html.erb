@@ -1,35 +1,36 @@
-<%= form_with(model: reservation) do |form| %>
-  <% if reservation.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
+<div class="flex flex-col items-center mx-5 pt-5 self-center p-8 rounded-xl border-2 border-purple-300 mt-3">
+  <%= form_with(model: reservation) do |form| %>
+    <% if reservation.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
 
-      <ul>
-        <% reservation.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% reservation.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="">
+      <%= form.select :flight_class, ["Eco", "Business"], {include_blank: "Flight class"}, {class: "focus:outline-none rounded-full p-3 my-3 border-2 border-purple-300 bg-white w-full"} %>
+    </div>
+
+    <div class="">
+      <%= form.number_field :passengers_count, :placeholder => "Number of passengers", :class => "focus:outline-none rounded-full p-3 my-3 border-2 border-purple-300"  %>
+    </div>
+
+    <div class="">
+      <%= form.hidden_field :user_id, value: current_user.id %>
+    </div>
+
+    <div class="">
+      <%= form.hidden_field :flight_id, value: params[:flight_id] %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit "Book flight", :class => "p-3 rounded-full w-full bg-pink-500 text-white font-semibold"  %>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :flight_class %>
-    <%= form.select :flight_class, ["Eco", "Business"], {include_blank: "Select your class"}, {} %>
-  </div>
-
-  <div class="field">
-    <%= form.label :passengers_count %>
-    <%= form.number_field :passengers_count %>
-  </div>
-
-  <div class="field">
-    <%= form.hidden_field :user_id, value: current_user.id %>
-  </div>
-
-  <div class="field">
-    <%= form.hidden_field :flight_id, value: params[:flight_id] %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

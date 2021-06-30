@@ -4,10 +4,14 @@
   <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
 </head>
 <body>
-<p>
-  Dear <%= @user.first_name %> <%= @user.name %>, <br>
-  Thank you for booking the flight from <%= @flight.departure_airport %> to <%= @flight.arrival_airport %>. <br>
-  Here is your reservation:
+<div class="flex flex-col w-screen h-screen">
+  <div class="pl-10 py-16 text-white rounded-bl-5rem bg-gradient-to-br from-purple-300 to-pink-500 text-4xl font-bold">
+    Flight Reservations
+  </div>
+  <p>
+    Dear <%= @user.first_name %> <%= @user.name %>, <br>
+    Thank you for booking the flight from <%= @flight.departure_airport %> to <%= @flight.arrival_airport %>. <br>
+    Here is your reservation:
   <ul>
     <li>
       Class: <%= @reservation.flight_class %>
@@ -16,6 +20,7 @@
       Number of passengers: <%= @reservation.passengers_count %>
     </li>
   </ul>
-</p>
+  </p>
+</div>
 </body>
 </html>
