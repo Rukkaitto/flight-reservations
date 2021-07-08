@@ -11,10 +11,6 @@ class ReservationsController < ApplicationController
     end
   end
 
-  # GET /reservations/1 or /reservations/1.json
-  def show
-  end
-
   # GET /reservations/new
   def new
     @query = params[:query]
@@ -50,13 +46,13 @@ class ReservationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_reservation
-      @reservation = Reservation.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_reservation
+    @reservation = Reservation.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def reservation_params
-      params.require(:reservation).permit(:flight_class, :passengers_count, :user_id, :flight_id)
-    end
+  # Only allow a list of trusted parameters through.
+  def reservation_params
+    params.require(:reservation).permit(:flight_class, :passengers_count, :user_id, :flight_id)
+  end
 end

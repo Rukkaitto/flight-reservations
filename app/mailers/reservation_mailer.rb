@@ -5,6 +5,11 @@ class ReservationMailer < ApplicationMailer
     @user = params[:user]
     @reservation = params[:reservation]
     @flight = params[:flight]
-    mail(to: @user.email, subject: "Reservation confirmation")
+
+    attachments['invoice.pdf'] = {
+      mime_type: 'application/pdf',
+      content: render_to_string(template: 'pdf/ticket.pdf.prawn', formats: [:pdf], locals: { :@reservation => @reservation })
+    }
+    mail(to: @user.email, subject: 'Reservation confirmation')
   end
 end

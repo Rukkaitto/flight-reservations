@@ -3,21 +3,17 @@ class FlightsController < ApplicationController
 
   # GET /flights or /flights.json
   def index
-    @flights = Flight.page(params[:page]);
-  end
-
-  # GET /flights/1 or /flights/1.json
-  def show
+    @flights = Flight.page(params[:page]).where('departure_date > ?', DateTime.now);
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_flight
-      @flight = Flight.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_flight
+    @flight = Flight.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def flight_params
-      params.require(:flight).permit(:number, :departure_airport, :arrival_airport, :departure_date, :duration, :business_class_seats, :economy_class_seats, :page)
-    end
+  # Only allow a list of trusted parameters through.
+  def flight_params
+    params.require(:flight).permit(:number, :departure_airport, :arrival_airport, :departure_date, :duration, :business_class_seats, :economy_class_seats, :page)
+  end
 end
